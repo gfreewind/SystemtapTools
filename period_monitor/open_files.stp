@@ -1,0 +1,12 @@
+global opens
+
+probe vfs.read
+{
+	opens[execname()] <<< 1
+}
+
+probe timer.s(3)
+{
+	foreach([process] in opens)
+		printf("%s: open %d files\n", process, @count(opens[process]))
+}
