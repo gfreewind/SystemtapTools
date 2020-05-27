@@ -1,0 +1,7 @@
+probe syscall.kill
+{
+    if (pid2execname(u32_arg(1)) == @1)
+	    printf("%s(%d) kill %s with (%s)\n", execname(), pid(), pid2execname(u32_arg(1)), argstr);
+}
+
+
