@@ -1,0 +1,10 @@
+probe kernel.function("udp_sendmsg")
+{
+	printf("%s(%d) udp_sendmsg (%s)\n", execname(), pid(), argstr);
+}
+
+
+#probe timer.ms(10000) # After 10 seconds
+#{
+#	exit()
+#}
